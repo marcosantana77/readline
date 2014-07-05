@@ -28,6 +28,11 @@ function readLine (file, opts){
           line.push(data[i]); 
         }
      }
+     //test for remaining info after last new line character escape and emit it to listener 
+     if (line.length) {
+        var tmpBuf = new Buffer(line);
+        self.emit("line",tmpBuf.toString());
+     }
    });
    readStream.on("error", function (err){
       self.emit("error",err);
